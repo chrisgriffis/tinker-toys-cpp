@@ -1,0 +1,155 @@
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <experimental/filesystem>
+#include <algorithm>
+#include <random>
+#include <sstream>
+#include <fstream>
+using namespace std;
+
+using KVS = vector<pair<string, string>>;
+using RKVS = map<string, vector<string>>;
+
+namespace fs = std::experimental::filesystem;
+
+
+// std::random_device rd;  //Will be used to obtain a seed for the random number engine
+std::mt19937 gen(1); //Standard mersenne_twister_engine seeded with rd()
+std::uniform_int_distribution<> dis0(0, 255);
+std::uniform_int_distribution<> dis1(1, 255);
+
+
+string genIp()
+{
+	stringstream ss;
+	ss << dis1(gen);
+	ss << ".";
+	ss << dis0(gen);
+	ss << ".";
+	ss << dis0(gen);
+	ss << ".";
+	ss << dis0(gen);
+	return ss.str();
+}
+
+string genEmail()
+{
+	vector<const char*> emails = { "dsfg","dghndgh","awregth","ghmj","aservg","srtbyhj","dtbyju","vertg","resthb","resvh","reyh","yhfjm" };
+	return string(emails[gen()%emails.size()]);
+}
+
+void genFile(fs::path p, int x)
+{
+	ofstream ofs(p);
+	for (int i =0; i<x; ++i)
+	{
+		ofs << "{\"" << genIp() << "\",\"" << genEmail() << "\"}," << endl;
+		ofs << "{\"" << genIp() << "\",\"" << genEmail() << "\"}," << endl;
+	}
+	ofs.close();
+}
+
+void loadfile(fs::path p,vector<pair<string,string>>& data)
+{
+	ifstream ifs(p);
+	string line;
+	data.clear();
+	while(getline(ifs,line))
+	{
+		stringstream linestream(line);
+		pair<string, string> s;
+		getline(linestream, s.first, ',');
+		getline(linestream, s.second, ',');
+		data.push_back(s);
+	}
+}
+
+
+ostream& operator<<(ostream& s, const RKVS& rkvs)
+{
+	for (auto& e : rkvs)
+	{
+		s << e.first << ": \n";
+		for (auto& x : e.second)
+		{
+			s << "\t" << x << "\n";
+		}
+		s << endl << endl;
+	}
+	return s;
+}
+
+int main()
+{
+	auto p = fs::current_path() / "io/ips.txt";
+	KVS kvs;
+	genFile(p,50);
+	loadfile(p,kvs);
+	ofstream ofs(fs::current_path() / "io/reversed.txt");
+	ofs << [](auto&& links)
+	{
+		RKVS returnval;
+		for (auto& p : links)
+		{
+			returnval[p.second].push_back(p.first);
+		}
+		return returnval;
+	}(kvs
+// 	 KVS{ 
+// 		 { "180.140.72.255","dghndgh" },
+// 		 { "42.133.79.192","dghndgh" },
+// 		 { "190.204.71.237","resthb" },
+// 		 { "13.25.178.20","dsfg" },
+// 		 { "154.146.212.139","dtbyju" },
+// 		 { "230.156.157.142","dsfg" },
+// 		 { "147.215.215.233","awregth" },
+// 		 { "114.222.96.86","resvh" },
+// 		 { "195.137.7.63","resvh" },
+// 		 { "19.57.1.128","resvh" },
+// 		 { "226.8.216.141","dsfg" },
+// 		 { "87.234.121.200","vertg" },
+// 		 { "215.131.198.149","reyh" },
+// 		 { "197.3.196.24","resvh" },
+// 		 { "174.76.26.52","dghndgh" },
+// 		 { "171.115.41.210","dsfg" },
+// 		 { "118.196.25.111","ghmj" },
+// 		 { "230.135.26.153","dtbyju" },
+// 		 { "179.9.195.231","resthb" },
+// 		 { "178.125.100.155","dtbyju" },
+// 		 { "9.83.166.136","srtbyhj" },
+// 		 { "191.10.23.143","dsfg" },
+// 		 { "101.25.199.243","vertg" },
+// 		 { "121.190.46.160","resthb" },
+// 		 { "197.183.65.113","aservg" },
+// 		 { "29.128.248.253","srtbyhj" },
+// 		 { "117.52.213.198","resvh" },
+// 		 { "7.219.149.203","awregth" },
+// 		 { "98.200.75.76","ghmj" },
+// 		 { "199.30.36.103","yhfjm" },
+// 		 { "225.196.57.240","ghmj" },
+// 		 { "2.96.13.10","dsfg" },
+// 		 { "31.81.135.121","vertg" },
+// 		 { "220.220.148.160","aservg" },
+// 		 { "246.94.60.233","aservg" },
+// 		 { "34.115.97.130","aservg" },
+// 		 { "195.103.98.10","aservg" },
+// 		 { "94.233.82.214","dtbyju" },
+// 		 { "144.71.231.176","awregth" },
+// 		 { "232.133.145.170","dtbyju" },
+// 		 { "135.176.22.229","aservg" },
+// 		 { "203.114.97.181","resvh" },
+// 		 { "54.96.183.61","aservg" },
+// 		 { "9.149.231.96","resthb" },
+// 		 { "97.25.241.142","srtbyhj" },
+// 		 { "151.116.43.134","resvh" },
+// 		 { "218.187.143.24","srtbyhj" },
+// 		 { "227.194.199.53","yhfjm" },
+// 		 { "73.101.248.21","srtbyhj" },
+// 		 { "69.219.177.113","dsfg" },
+// 		}
+	);
+	return 0;
+}

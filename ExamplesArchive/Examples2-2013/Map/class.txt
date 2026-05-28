@@ -1,0 +1,1066 @@
+main.cpp
+class _PMD	size(12):
+	+---
+ 0	| mdisp
+ 4	| pdisp
+ 8	| vdisp
+	+---
+
+
+
+class _TypeDescriptor	size(8):
+	+---
+ 0	| pVFTable
+ 4	| spare
+ 8	| name
+	+---
+
+
+
+class _s__CatchableType	size(28):
+	+---
+ 0	| properties
+ 4	| pType
+ 8	| _PMD thisDisplacement
+20	| sizeOrOffset
+24	| copyFunction
+	+---
+
+
+
+class _s__CatchableTypeArray	size(4):
+	+---
+ 0	| nCatchableTypes
+ 4	| arrayOfCatchableTypes
+	+---
+
+
+
+class _s__ThrowInfo	size(16):
+	+---
+ 0	| attributes
+ 4	| pmfnUnwind
+ 8	| pForwardCompat
+12	| pCatchableTypeArray
+	+---
+
+
+
+class _s__RTTIBaseClassDescriptor2	size(28):
+	+---
+ 0	| pTypeDescriptor
+ 4	| numContainedBases
+ 8	| _PMD where
+20	| attributes
+24	| pClassDescriptor
+	+---
+
+
+
+class _s__RTTIBaseClassArray	size(1):
+	+---
+ 0	| arrayOfBaseClassDescriptors
+	+---
+
+
+
+class _s__RTTIClassHierarchyDescriptor	size(16):
+	+---
+ 0	| signature
+ 4	| attributes
+ 8	| numBaseClasses
+12	| pBaseClassArray
+	+---
+
+
+
+class _s__RTTICompleteObjectLocator	size(20):
+	+---
+ 0	| signature
+ 4	| offset
+ 8	| cdOffset
+12	| pTypeDescriptor
+16	| pClassDescriptor
+	+---
+
+
+
+class __s_GUID	size(16):
+	+---
+ 0	| Data1
+ 4	| Data2
+ 6	| Data3
+ 8	| Data4
+	+---
+
+
+
+class default_valueAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class attributeAttribute	size(6):
+	+---
+ 0	| ValidOn
+ 4	| AllowMultiple
+ 5	| Inherited
+	+---
+
+
+
+class source_annotation_attributeAttribute	size(6):
+	+---
+ 0	| ValidOn
+ 4	| AllowMultiple
+  	| <alignment member> (size=1)
+	+---
+
+
+
+class v1_earlyAttribute	size(1):
+	+---
+	+---
+
+
+
+class v1_nameAttribute	size(4):
+	+---
+ 0	| name
+	+---
+
+
+
+class v1_alttypeAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+
+
+class usageAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class repeatableAttribute	size(1):
+	+---
+	+---
+
+
+
+class as_stringAttribute	size(1):
+	+---
+	+---
+
+
+
+class process_earlyAttribute	size(1):
+	+---
+	+---
+
+
+
+class notify_atlprovAttribute	size(1):
+	+---
+	+---
+
+
+
+class help_stringAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class requires_valueAttribute	size(1):
+	+---
+	+---
+
+
+
+class multi_valueAttribute	size(1):
+	+---
+	+---
+
+
+
+class event_receiverAttribute	size(6):
+	+---
+ 0	| type_e type
+ 4	| layout_dependent
+  	| <alignment member> (size=1)
+	+---
+
+
+
+class no_injected_textAttribute	size(1):
+	+---
+ 0	| value
+	+---
+
+
+
+class emitidlAttribute	size(6):
+	+---
+ 0	| value
+ 4	| defaultimports
+  	| <alignment member> (size=1)
+	+---
+
+
+
+class exportAttribute	size(1):
+	+---
+	+---
+
+
+
+class idl_moduleAttribute	size(30):
+	+---
+ 0	| name
+ 4	| dllname
+ 8	| version
+12	| uuid
+16	| helpstring
+20	| helpstringcontext
+24	| helpcontext
+28	| hidden
+29	| restricted
+	+---
+
+
+
+class idl_quoteAttribute	size(4):
+	+---
+ 0	| text
+	+---
+
+
+
+class implementsAttribute	size(8):
+	+---
+ 0	| interfaces
+ 4	| dispinterfaces
+	+---
+
+
+
+class importidlAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class includelibAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class library_blockAttribute	size(1):
+	+---
+	+---
+
+
+
+class satypeAttribute	size(4):
+	+---
+ 0	| type
+	+---
+
+
+
+class propgetAttribute	size(1):
+	+---
+	+---
+
+
+
+class propputAttribute	size(1):
+	+---
+	+---
+
+
+
+class propputrefAttribute	size(1):
+	+---
+	+---
+
+
+
+class providerAttribute	size(12):
+	+---
+ 0	| name
+ 4	| uuid
+ 8	| cookies
+	+---
+
+
+
+class coclassAttribute	size(1):
+	+---
+	+---
+
+
+
+class controlAttribute	size(1):
+	+---
+	+---
+
+
+
+class customAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class dispinterfaceAttribute	size(1):
+	+---
+	+---
+
+
+
+class dualAttribute	size(1):
+	+---
+	+---
+
+
+
+class lcidAttribute	size(1):
+	+---
+	+---
+
+
+
+class objectAttribute	size(1):
+	+---
+	+---
+
+
+
+class progidAttribute	size(4):
+	+---
+ 0	| name
+	+---
+
+
+
+class threadingAttribute	size(4):
+	+---
+ 0	| threading_e value
+	+---
+
+
+
+class uuidAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class versionAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class vi_progidAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class moduleAttribute	size(52):
+	+---
+ 0	| type_e type
+ 4	| name
+ 8	| version
+12	| uuid
+16	| lcid
+20	| control
+  	| <alignment member> (size=1)
+22	| helpstring
+26	| helpstringcontext
+30	| helpstringdll
+34	| helpfile
+38	| helpcontext
+42	| hidden
+43	| restricted
+44	| custom
+48	| resource_name
+	+---
+
+
+
+class aggregatableAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+
+
+class appobjectAttribute	size(1):
+	+---
+	+---
+
+
+
+class async_uuidAttribute	size(4):
+	+---
+ 0	| uuid
+	+---
+
+
+
+class bindableAttribute	size(1):
+	+---
+	+---
+
+
+
+class call_asAttribute	size(4):
+	+---
+ 0	| local_proc
+	+---
+
+
+
+class caseAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class cpp_quoteAttribute	size(4):
+	+---
+ 0	| string
+	+---
+
+
+
+class defaultAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class defaultbindAttribute	size(1):
+	+---
+	+---
+
+
+
+class defaultcollelemAttribute	size(1):
+	+---
+	+---
+
+
+
+class defaultvalueAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class defaultvtableAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class displaybindAttribute	size(1):
+	+---
+	+---
+
+
+
+class entryAttribute	size(4):
+	+---
+ 0	| entry_id
+	+---
+
+
+
+class first_isAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class helpcontextAttribute	size(4):
+	+---
+ 0	| helpcontext_value
+	+---
+
+
+
+class helpfileAttribute	size(4):
+	+---
+ 0	| filename
+	+---
+
+
+
+class helpstringAttribute	size(4):
+	+---
+ 0	| help_text_string
+	+---
+
+
+
+class helpstringcontextAttribute	size(4):
+	+---
+ 0	| contextid
+	+---
+
+
+
+class helpstringdllAttribute	size(4):
+	+---
+ 0	| dllname
+	+---
+
+
+
+class hiddenAttribute	size(1):
+	+---
+	+---
+
+
+
+class idAttribute	size(4):
+	+---
+ 0	| id_num
+	+---
+
+
+
+class iid_isAttribute	size(4):
+	+---
+ 0	| limited_expression
+	+---
+
+
+
+class immediatebindAttribute	size(1):
+	+---
+	+---
+
+
+
+class importAttribute	size(4):
+	+---
+ 0	| idl_file
+	+---
+
+
+
+class importlibAttribute	size(4):
+	+---
+ 0	| tlb_file
+	+---
+
+
+
+class inAttribute	size(1):
+	+---
+	+---
+
+
+
+class includeAttribute	size(4):
+	+---
+ 0	| include_file
+	+---
+
+
+
+class last_isAttribute	size(4):
+	+---
+ 0	| expression
+	+---
+
+
+
+class length_isAttribute	size(4):
+	+---
+ 0	| expression
+	+---
+
+
+
+class licensedAttribute	size(1):
+	+---
+	+---
+
+
+
+class localAttribute	size(1):
+	+---
+	+---
+
+
+
+class max_isAttribute	size(4):
+	+---
+ 0	| expression
+	+---
+
+
+
+class ms_unionAttribute	size(1):
+	+---
+	+---
+
+
+
+class nonbrowsableAttribute	size(1):
+	+---
+	+---
+
+
+
+class noncreatableAttribute	size(1):
+	+---
+	+---
+
+
+
+class nonextensibleAttribute	size(1):
+	+---
+	+---
+
+
+
+class odlAttribute	size(1):
+	+---
+	+---
+
+
+
+class oleautomationAttribute	size(1):
+	+---
+	+---
+
+
+
+class optionalAttribute	size(1):
+	+---
+	+---
+
+
+
+class outAttribute	size(1):
+	+---
+	+---
+
+
+
+class pointer_defaultAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+
+
+class pragmaAttribute	size(4):
+	+---
+ 0	| token_sequence
+	+---
+
+
+
+class ptrAttribute	size(1):
+	+---
+	+---
+
+
+
+class publicAttribute	size(1):
+	+---
+	+---
+
+
+
+class rangeAttribute	size(8):
+	+---
+ 0	| low_val
+ 4	| high_val
+	+---
+
+
+
+class readonlyAttribute	size(1):
+	+---
+	+---
+
+
+
+class refAttribute	size(1):
+	+---
+	+---
+
+
+
+class requesteditAttribute	size(1):
+	+---
+	+---
+
+
+
+class restrictedAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class retvalAttribute	size(1):
+	+---
+	+---
+
+
+
+class size_isAttribute	size(4):
+	+---
+ 0	| expression
+	+---
+
+
+
+class stringAttribute	size(1):
+	+---
+	+---
+
+
+
+class sourceAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class switch_isAttribute	size(4):
+	+---
+ 0	| limited_expression
+	+---
+
+
+
+class switch_typeAttribute	size(4):
+	+---
+ 0	| switch_type_specifier
+	+---
+
+
+
+class transmit_asAttribute	size(4):
+	+---
+ 0	| xmit_type
+	+---
+
+
+
+class uidefaultAttribute	size(1):
+	+---
+	+---
+
+
+
+class uniqueAttribute	size(1):
+	+---
+	+---
+
+
+
+class usesgetlasterrorAttribute	size(1):
+	+---
+	+---
+
+
+
+class v1_enumAttribute	size(1):
+	+---
+	+---
+
+
+
+class varargAttribute	size(1):
+	+---
+	+---
+
+
+
+class wire_marshalAttribute	size(4):
+	+---
+ 0	| wire_type
+	+---
+
+
+
+class event_sourceAttribute	size(10):
+	+---
+ 0	| type_e type
+ 4	| optimize_e optimize
+ 8	| decorate
+  	| <alignment member> (size=1)
+	+---
+
+
+
+class hookAttribute	size(16):
+	+---
+ 0	| event
+ 4	| source
+ 8	| handler
+12	| receiver
+	+---
+
+
+
+class unhookAttribute	size(16):
+	+---
+ 0	| event
+ 4	| source
+ 8	| handler
+12	| receiver
+	+---
+
+
+
+class synchronizeAttribute	size(1):
+	+---
+	+---
+
+
+
+class soap_handlerAttribute	size(20):
+	+---
+ 0	| name
+ 4	| namespace
+ 8	| protocol
+12	| style
+16	| use
+	+---
+
+
+
+class soap_methodAttribute	smain.cpp(3) : fatal error C1034: cstdio: no include path set
+ize(4):
+	+---
+ 0	| name
+	+---
+
+
+
+class soap_headerAttribute	size(8):
+	+---
+ 0	| value
+ 4	| required
+ 5	| in
+ 6	| out
+  	| <alignment member> (size=1)
+	+---
+
+
+
+class soap_namespaceAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class com_interface_entryAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class support_error_infoAttribute	size(4):
+	+---
+ 0	| error_interface
+	+---
+
+
+
+class aggregatesAttribute	size(4):
+	+---
+ 0	| clsid
+	+---
+
+
+
+class implements_categoryAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class requires_categoryAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class rdxAttribute	size(12):
+	+---
+ 0	| key
+ 4	| valuename
+ 8	| regtype
+	+---
+
+
+
+class registration_scriptAttribute	size(4):
+	+---
+ 0	| script
+	+---
+
+
+
+class db_sourceAttribute	size(12):
+	+---
+ 0	| source
+ 4	| name
+ 8	| hresult
+	+---
+
+
+
+class db_commandAttribute	size(24):
+	+---
+ 0	| command
+ 4	| name
+ 8	| source_name
+12	| hresult
+16	| bindings
+20	| bulk_fetch
+	+---
+
+
+
+class db_tableAttribute	size(20):
+	+---
+ 0	| table
+ 4	| name
+ 8	| source_name
+12	| hresult
+16	| bulk_fetch
+	+---
+
+
+
+class db_accessorAttribute	size(6):
+	+---
+ 0	| id
+ 4	| auto_
+  	| <alignment member> (size=1)
+	+---
+
+
+
+class db_columnAttribute	size(24):
+	+---
+ 0	| ordinal
+ 4	| dbtype
+ 8	| precision
+12	| scale
+16	| status
+20	| length
+	+---
+
+
+
+class db_paramAttribute	size(28):
+	+---
+ 0	| ordinal
+ 4	| paramtype
+ 8	| dbtype
+12	| precision
+16	| scale
+20	| status
+24	| length
+	+---
+
+
+
+class tag_nameAttribute	size(8):
+	+---
+ 0	| name
+ 4	| parse_func
+	+---
+
+
+
+class request_handlerAttribute	size(8):
+	+---
+ 0	| name
+ 4	| sdl
+	+---
+
+
+
+class perfmonAttribute	size(6):
+	+---
+ 0	| name
+ 4	| register
+  	| <alignment member> (size=1)
+	+---
+
+
+
+class perf_objectAttribute	size(30):
+	+---
+ 0	| name_res
+ 4	| help_res
+ 8	| namestring
+12	| helpstring
+16	| detail
+20	| no_instances
+  	| <alignment member> (size=1)
+22	| class_
+26	| maxinstnamelen
+	+---
+
+
+
+class perf_counterAttribute	size(38):
+	+---
+ 0	| namestring
+ 4	| helpstring
+ 8	| name_res
+12	| help_res
+16	| countertype
+20	| defscale
+24	| default_counter
+  	| <alignment member> (size=1)
+26	| detail
+30	| max_counter_size
+34	| countertype_string
+	+---
+
+
+

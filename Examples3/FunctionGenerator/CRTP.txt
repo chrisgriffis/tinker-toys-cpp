@@ -1,0 +1,77 @@
+
+template<class D>
+class MyTemplatedBase
+{
+public:
+    D *dostuff()
+    {
+        return new D;
+    }
+};
+
+template<class X>
+class MyBase : public MyTemplatedBase<MyBase<X>>
+{
+public:
+};
+
+typedef MyBase<double> MyDouble;
+typedef MyBase<bool> MyBool;
+
+template<typename T>
+void foo(T const& x)
+{
+    T* y = x.dostuff();
+    delete y;
+}
+
+MyBool b;
+MyDouble d;
+foo(b);
+foo(d);
+
+
+template<class DerivedOp>
+struct BinaryOp 
+{
+    virtual double operator()(double a,double b){return static_cast<DerivedOp*>(this)->operator()(a,b);} 
+    virtual const char* getSymbolString() const {return static_cast<DerivedOp*>(this)->getSymbolString();};
+};
+
+struct NOOP : public BinaryOp<NOOP>
+{ 
+    double operator()(double a,double b){return a;}
+    const char* getSymbolString() const {return "<>";}
+};
+
+#define MakeBinaryOp(opname,opsymbol) \
+struct opname : public BinaryOp<opname> \
+{ \
+    double operator()(double a,double b){return a##opsymbol##b;} \
+    const char* getSymbolString() const {return #opsymbol;}\
+}
+
+
+
+
+struct BinaryOp 
+{
+    virtual double operator()(double a,double b) = 0; 
+    virtual const char* getSymbolString() const = 0;
+};
+
+struct NOOP : public BinaryOp 
+{ 
+    double operator()(double a,double b){return a;}
+    const char* getSymbolString() const {return "<>";}
+};
+
+#define MakeBinaryOp(opname,opsymbol) \
+struct opname : public BinaryOp \
+{ \
+    double operator()(double a,double b){return a##opsymbol##b;} \
+    const char* getSymbolString() const {return #opsymbol;}\
+}
+
+
+

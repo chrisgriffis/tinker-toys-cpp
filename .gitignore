@@ -1,0 +1,124 @@
+
+############################################
+# Build outputs (your main problem)
+############################################
+**/Debug/
+**/Release/
+**/x64/
+**/x86/
+**/out/
+**/build/
+**/Output/
+**/Outputs/
+
+############################################
+# VS intermediate + build artifacts
+############################################
+**/obj/
+**/bin/
+**/ipch/
+**/.vs/
+**/*.tlog
+**/*.lastbuildstate
+**/*.unsuccessfulbuild
+**/*.cache
+**/*.log
+**/*.buildlog
+
+############################################
+# MSBuild / C++ specific junk
+############################################
+**/*.idb
+**/*.pdb
+**/*.ilk
+**/*.obj
+**/*.pch
+**/*.res
+**/*.rsp
+**/*.exp
+**/*.lib
+
+############################################
+# NuGet / package artifacts
+############################################
+**/packages/
+**/*.nupkg
+**/*.snupkg
+**/project.lock.json
+**/project.assets.json
+
+############################################
+# User / machine-specific files
+############################################
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+############################################
+# Test / coverage outputs
+############################################
+**/TestResults/
+**/coverage/
+**/*.coverage
+**/*.coveragexml
+
+############################################
+# Logs / diagnostics (your mention)
+############################################
+**/logs/
+**/Logs/
+**/*.log
+**/*.trace
+
+############################################
+# ZIP extraction leftovers
+############################################
+**/__MACOSX/
+**/*.zip
+**/*.7z
+**/*.rar
+
+############################################
+# Misc garbage often in recovered repos
+############################################
+Thumbs.db
+Desktop.ini
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+
+############################################
+# Optional: keep root-level intentional dirs
+# (uncomment if needed)
+############################################
+#!/src/
+#!/include/
+
+# Old VS junk
+*.ncb
+*.sdf
+*.opensdf
+
+# Build logs that slip through
+BuildLog.htm
+
+# Executables and outputs
+*.exe
+*.out
+
+# Weird conflict artifacts
+*conflicted copy*
+
+# Random generated DBs
+*.VC.db
+*.VC.opendb
+
+# TLOG folders explicitly (some cases)
+**/*.tlog/
+
+# Embedded manifest junk
+*.manifest
+*.dep

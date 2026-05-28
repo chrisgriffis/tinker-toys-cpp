@@ -1,0 +1,109 @@
+#!gbuild
+#******************************************************************************
+# This library provides
+#******************************************************************************
+[Library]
+
+
+#------------------------------------------------------------------------------
+#
+#      ! ! !  DO NOT USE GREEN HILLS IDE TO MODIFY PROJECT OPTIONS  ! ! !
+#
+# doing so will destroy the customized formatting of this file.  The Green Hills 
+# IDE can be used to edit this file directly, right click on project -> Edit.
+#------------------------------------------------------------------------------
+# If an option in this file is not needed, it is to be commented out,
+# NOT deleted.
+#------------------------------------------------------------------------------
+# This library provides access to Tiny XML
+#------------------------------------------------------------------------------
+# options that are commonly changed when setting up a new project from this 
+# template are highlighted by the following comment style
+#
+#******************************************************************************
+#
+#******************************************************************************
+
+
+
+#------------------------------------------------------------------------------
+# Include Paths
+#------------------------------------------------------------------------------
+# Place include paths in the default.gpj DO NOT place them here.
+#------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------
+# Compiler options
+#------------------------------------------------------------------------------
+# Most all compile options should be placed in the default.gpj not here.
+# List only compile options that this library needs to set differently from the
+# project defaults.  
+#------------------------------------------------------------------------------
+
+
+
+#******************************************************************************
+# Output Files
+#******************************************************************************
+# libraries should begin with Lib then the name of the library and end with 
+# the .a extension
+#
+# NOTE: This option must be set in the individual libraries, GHS does not allow
+#       it to be set in the default.gpj
+#------------------------------------------------------------------------------
+   -o $lib_output_path/qf.a
+
+   -I../../../../ports/ppc555/threadX/ghs
+   -I../../../../include
+   
+#------------------------------------------------------------------------------
+# Source File Path
+#------------------------------------------------------------------------------
+   :sourceDir=$qf_path_relative_to_root/$qf_source_path
+
+
+#------------------------------------------------------------------------------
+# Dependencies
+#------------------------------------------------------------------------------
+# Dependencies should not be placed in library projects, only in 
+# executable projects
+#------------------------------------------------------------------------------
+   #----------------------------------------------------------------------------
+   # Pre build libraries need to be listed first, otherwise they will not link 
+   # correctly to the library
+
+
+../../../source/qa_fifo.cpp
+../../../source/qa_lifo.cpp
+../../../source/qa_fifo_.cpp
+../../../source/qa_lifo_.cpp
+../../../source/qa_get_.cpp
+../../../source/qa_run.cpp
+../../../source/qa_sub.cpp
+../../../source/qa_usub.cpp
+../../../source/qa_usuba.cpp
+../../../source/qeq_init.cpp
+../../../source/qeq_fifo.cpp
+../../../source/qeq_lifo.cpp
+../../../source/qeq_get.cpp
+../../../source/qf_act.cpp
+../../../source/qf_gc.cpp
+../../../source/qf_log2.cpp
+../../../source/qf_new.cpp
+../../../source/qf_pool.cpp
+../../../source/qf_psini.cpp
+../../../source/qf_pspub.cpp
+../../../source/qf_pwr2.cpp
+../../../source/qf_tick.cpp
+../../../source/qf_time.cpp
+../../../source/qmp_get.cpp
+../../../source/qmp_init.cpp
+../../../source/qmp_put.cpp
+../../../source/qte_ctor.cpp
+../../../source/qte_arm.cpp
+../../../source/qte_darm.cpp
+../../../source/qte_rarm.cpp
+../../../ppc555/threadX/ghs/qf_port.cpp
+

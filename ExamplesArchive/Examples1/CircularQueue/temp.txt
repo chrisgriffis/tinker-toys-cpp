@@ -1,0 +1,134 @@
+#include "CircularQueue.h"
+#include <windows.h>
+#include <iostream>
+#include <stdio.h>
+#include <map>
+
+
+using namespace Griffis;
+using namespace std;
+
+namespace Griffis
+{
+    struct MyConvenientStruct
+    {
+        IQueue<int>* iq;
+        int threadNum;
+        unsigned queueSize;
+    };
+}
+void ThreadMain(MyConvenientStruct* s);
+HANDLE CreateChildTh(MyConvenientStruct* s);
+
+
+int main()
+{ 
+
+    unsigned myQueueSize = 1;
+    const size_t myThrCount = 3;
+    DWORD dwEvent;
+    HANDLE hThreadHandle[myThrCount];
+
+    cout << "Enter queue size: ";
+    cin >> myQueueSize;
+    IQueue<int>* iq = new CircularQueueOfInts();
+
+    for(int loopIndex = 0;loopIndex<myThrCount;loopIndex++)
+    {
+        MyConvenientStruct tempStruct = {iq,loopIndex,myQueueSize};
+        hThreadHandle[loopIndex] = CreateChildTh(&tempStruct);
+    }
+    dwEvent = WaitForMultipleObjects(myThrCount,hThreadHandle,TRUE,INFINITE);
+
+    switch (dwEvent) 
+    { 
+    case WAIT_OBJECT_0 + 0: 
+        wprintf(L"First event was signaled.\n");
+        break; 
+    case WAIT_OBJECT_0 + 1: 
+        wprintf(L"Second event was signaled.\n");
+        break;
+    case WAIT_OBJECT_0 + 2: 
+        wprintf(L"Third event was signaled.\n");
+        break; 
+    case WAIT_TIMEOUT:
+        wprintf(L"Wait timed out...\n");
+        break;
+    default: 
+        wprintf(L"Wait error %d\n", GetLastError()); 
+        ExitProcess(0); 
+    }
+
+    for(int loopIndex = 0;loopIndex<myThrCount;loopIndex++)
+    {
+        if(CloseHandle(hThreadHandle[loopIndex]) != 0)
+            wprintf(L"Closing the hThreadHandle[%d] handle is OK...\n", loopIndex);
+        else
+            wprintf(L"Failed to close the hThreadHandle[%d] handle, error %d...\n", GetLastError());
+    }
+
+    delete iq;
+    system("pause");
+    return 0;
+}
+
+void ThreadMain(MyConvenientStruct* s)
+{
+    map<typename IQueue<int>::ErrorCodeType,string> m;
+    m[IQueue<int>::SUCCESS] = "success";
+    m[IQueue<int>::FAIL] = "fail";
+    m[IQueue<int>::NOTINITIALIZED] = "not initialized";
+    m[IQueue<int>::ALREADYINITIALIZED] = "already initialized";
+    m[IQueue<int>::EMPTY] = "empty";
+    m[IQueue<int>::FULL] = "full";
+
+    {
+        string str = m[s->iq->Initialize(s->queueSize)];
+        wprintf(L"thread %d init queue: %s \n",s->threadNum,&str[0]);
+    }
+
+    for(unsigned x = 0; x < 2*s->queueSize; x++)
+    {
+        string str = m[s->iq->Enqueue(x)];
+        wprintf(L"thread %d enqueue<- %d: %s \n",s->threadNum,x, &str[0]);
+    }
+    for(unsigned x = 0; x < 2*s->queueSize; x++)
+    {
+        int temp = -1;
+        string str = m[s->iq->Dequeue(temp)];
+        wprintf(L"thread %d dequeue-> %d: %s \n",s->threadNum,temp, &str[0]);
+    }
+    wprintf(L"\n\n XXXXXXXXXXXXXXXX thread %d self race XXXXXXXXXXXXXXXXXXXXX\n\n",s->threadNum);
+    for(unsigned x = 0; x < 2*s->queueSize; x++)
+    {
+        int temp = -1;
+        string str = m[s->iq->Enqueue(x)];
+        wprintf(L"thread %d enqueue<- %d: %s \n",s->threadNum,x, &str[0]);
+        str = m[s->iq->Dequeue(temp)];
+        wprintf(L"thread %d dequeue-> %d: %s \n",s->threadNum,temp, &str[0]);
+    }
+}
+
+HANDLE CreateChildTh(MyConvenientStruct* s)
+{
+    HANDLE hThread;
+    DWORD dwId;
+
+    hThread = CreateThread(NULL,0,(LPTHREAD_START_ROUTINE)ThreadMain,(LPVOID)s,0,&dwId);
+
+    if(hThread)
+    {
+        wprintf(L"CreateThread() is OK, ID num %d...\n", dwId);
+        return hThread;
+    }
+    else
+    {
+        wprintf(L"CreateThread() failed, error %d\n", GetLastError());
+        return NULL;
+    }
+}
+
+
+
+
+

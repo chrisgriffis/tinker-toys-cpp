@@ -1,0 +1,33 @@
+/*
+*********************************************************************************************************
+*                                                uC/OS-II
+*                                          The Real-Time Kernel
+*
+*                           (c) Copyright 1992-1999, Jean J. Labrosse, Weston, FL
+*                                           All Rights Reserved
+*
+*                                           MASTER INCLUDE FILE
+*
+* Updated By: Miro Samek
+*********************************************************************************************************
+*/
+
+#include    <stdio.h>
+#include    <string.h>
+#include    <ctype.h>
+#include    <stdlib.h>
+#include    <conio.h>
+#include    <dos.h>
+#include    <setjmp.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include    "os_cpu.h"
+#include    "os_cfg.h"
+#include    "ucos_ii.h"
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,0 +1,5 @@
+; dlltool --base-file C:\DOCUME~1\AWAKEF~1\LOCALS~1\Temp/cca04988.base --output-exp MyFirstDLL.exp --dllname MyFirstDLL.dll --output-def libMyFirstDLL.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup@12 --def C:\DOCUME~1\AWAKEF~1\LOCALS~1\Temp/cca04988.def --output-lib libMyFirstDLL.a
+EXPORTS
+	FuckAss @ 1
+	StillWorks @ 2
+	Another @ 3

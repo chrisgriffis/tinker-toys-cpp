@@ -1,0 +1,56 @@
+
+-epi programming book
+-dynamic programming and greedy alg 
+-databases and hash joins etc
+-review consoleapp1
+
+Convex hull
+
+Reverse a list
+Bit twiddle study
+Randomize an array
+Partition 
+Find kth
+Impl Fibonacci
+Impl collatz tester
+Impl stock prices
+Impl max subarray
+Stable sort a list
+Make a chess board adj mat for knight
+Clock angle
+Look up qr code
+
+
+Practice:
+Return a struct from a Init list
+Create a Min and max heap for this struct
+Create a random number from a uniform interval
+Impl Fibonacci
+Impl collatz tester
+Impl stock prices
+Impl max subarray
+Stable sort a list
+
+Find Median, kth and dual heap
+Anagrams problem
+Sudoku solver
+Minesweeper solver
+
+Basic binary search
+Sqrt binary search 
+Find kth element
+Anagrams group
+======
+
+Calc avg rate of requests grade A 
+Count over sliding window
+
+Reverse lookup ip to user name find count occurrence
+ large input needs merge sort grade A+
+
+Inorder successor grade B
+
+Winning combinations for election grade C-
+
+Convert page sequence to hyphen comma print string grade B+
+

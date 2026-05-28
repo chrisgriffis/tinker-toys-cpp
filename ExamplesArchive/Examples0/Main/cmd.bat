@@ -1,0 +1,1 @@
+main.exe mySeconddll.dll GetFn cfghj dty

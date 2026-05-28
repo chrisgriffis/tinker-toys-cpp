@@ -1,0 +1,185 @@
+#include <utility>
+#include <iostream>
+
+//tuple impl from scratch without looking... with a stream output overload
+namespace my
+{
+    namespace detail //sequestered TMP utilities
+    {
+        //handmade equiv of std::index_sequence 
+        //and std::make_index_sequence
+        template< size_t... > struct idx_seq {};
+
+        template<typename, size_t>
+        struct append_idx_seq;
+
+        template<size_t... Is, size_t K>
+        struct append_idx_seq<idx_seq<Is...>, K>
+        {
+            using type = idx_seq<Is..., K>;
+        };
+
+        template<>
+        struct append_idx_seq<void, 0>
+        {
+            using type = idx_seq<0>;
+        };
+
+        template< size_t K> struct make_idx_seq
+        {
+            using type =
+                typename append_idx_seq<
+                typename make_idx_seq<K - 1>::type,
+                K - 1
+                >::type;
+        };
+
+        template<> struct make_idx_seq<0> { using type = void; };
+
+        template< size_t K>
+        using make_idx_seq_t = typename make_idx_seq<K>::type;
+    }
+
+    namespace impl //sequestered implementation details
+    {
+        //tuple element wrapper
+        //type is statically indexed to differentiate
+        //tuple elements with duplicate types, e.g. tuple<int,int>
+        //otherwise type system would fail due to ambiguity
+        template< size_t K, typename T>
+        struct tuple_elem
+        {
+            operator T() const { return _t; }
+            tuple_elem() :_t() {}
+            tuple_elem(const T& t) :_t(t) {}
+            T& get() { return _t; }
+            void set(T& t) { _t = t; }
+        private:
+            T _t;
+        };
+
+        //tuple implementation detail aggregates tuple wrappers as base classes,
+        //which are unique for duplicate value types because
+        //each tuple wrapper element is statically indexed
+        template<typename... > struct tuple; //inside namespace impl
+
+        template<size_t... Is, typename... Ts>
+        struct tuple<detail::idx_seq<Is...>, Ts...> :
+            //multiple inheritance via param pack expansion
+            tuple_elem<Is, Ts>...
+        {
+            tuple() = default;
+            tuple(Ts... args) :
+                //ctr initializer list via param pack expansion
+                tuple_elem<Is, Ts>(std::forward<Ts>(args))...
+                //forwarding mechanism preserves cv-unqualified 
+                //value category
+            {}
+        };
+    }
+
+    //the actual interface
+    template<typename... Ts>
+    class tuple :
+        //base class imbues statically indexed elements as base classes
+        //impl at this level uses overloads to select correct base classes
+        impl::tuple<detail::make_idx_seq_t<sizeof...(Ts)>, Ts...>
+    {
+        struct local_impl
+        {
+            template< size_t K, typename T1, typename... T>
+            struct at_index {
+                using type = typename at_index< K - 1, T...>::type;
+            };
+
+            template< typename T1, typename... T>
+            struct at_index<0, T1, T...> { using type = T1; };
+
+            template<typename> struct unpack;
+            template<size_t... Is>
+            struct unpack<detail::idx_seq<Is...>>
+            {
+                //template<template <typename,typename...> typename F, typename R, typename... Fargs>
+                template<typename F>
+                static void call(F& f, tuple& t)
+                {
+                    f(t.template get<Is>()...);
+                }
+            };
+
+        };
+
+        template<size_t Idx>
+        using tup_elem_type =
+            typename local_impl::template 
+                at_index<Idx, Ts...>::type;
+
+        template<size_t Idx>
+        using tup_elem = impl::tuple_elem<Idx, tup_elem_type<Idx>>;
+
+    public:
+        tuple() = default;
+        tuple(Ts... args) :
+            //ctr initializer list via param pack expansion
+            impl::tuple<
+            detail::make_idx_seq_t<sizeof...(Ts)>,
+            Ts...
+            >(std::forward<Ts>(args)...)
+        {}
+
+        template<size_t Idx>
+        tup_elem_type<Idx>& get()
+        {
+            //forward call to statically indexed 
+            //tuple elem base class
+            return tup_elem<Idx>::get();
+        }
+
+        template<size_t Idx>
+        void set(tup_elem_type<Idx> t)
+        {
+            //forward call to statically indexed 
+            //tuple elem base class
+            return tup_elem<Idx>::set(t);;
+        }
+
+        template<typename F>
+        void unpack_as_args_into(F& f)
+        {
+            local_impl::template 
+                unpack<detail::make_idx_seq_t<sizeof...(Ts)>>::call(f, *this);
+        };
+    };
+
+
+}
+
+template<typename... Args>
+void to_stream(std::ostream& s, Args... args) //see note at end
+{
+    //wrapper used to capture stream object because
+    //can't use stream ref directly as a function arg
+    s << "elements: ";
+    //auto v_wrap = [&s](auto& v) { s << v << " "; return 0; };
+    auto v_wrap = [](std::ostream& s, auto& v) { s << v << " "; return 0; };
+    //call to empty lambda used to expand param pack
+    [](...) {}(v_wrap(s,args)...);
+    s << std::endl;
+}
+
+template<typename... Ts>
+std::ostream& operator<<(std::ostream& s, my::tuple<Ts...>& t)
+{
+    t.unpack_as_args_into([&s](Ts... args) {to_stream<Ts...>(s, args...); });
+    return s;
+}
+
+int main()
+{
+    using namespace std;
+    my::tuple<int, char, int> tup1(5, 'a', -11);
+    my::tuple<bool, bool, void*, size_t> tup2(true, false, nullptr, 1);
+    tup2.set<2>(&tup2);
+    cout << tup1 << endl << boolalpha << hex << tup2;
+    return 0;
+}

@@ -1,0 +1,15 @@
+# Normalize everything
+* text=auto eol=lf
+
+# C/C++ source always LF
+*.cpp text eol=lf
+*.h text eol=lf
+*.hpp text eol=lf
+
+# Text files
+*.txt text eol=lf
+
+# Windows scripts (if any)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+``

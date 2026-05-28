@@ -1,0 +1,90 @@
+#include <iostream>
+#include <list>
+#include <algorithm>
+using namespace std;
+
+template<class T>
+struct PredRetainMax;
+
+template<class Time, class Val>
+struct PredRetainMax<std::pair<Time,Val>>
+{
+	PredRetainMax(Time cutoff,Val& m) :_cutoff(cutoff),_max(m) {}
+	bool operator()(const std::pair<Time, Val>& s)
+	{
+		//if not a member, then we found the head of the sublist
+		//of expired samples
+		if (s.first < _cutoff) return true;
+		//otherwise update max and report that we havent 
+		//found an expired sample
+		_max = std::max(_max, s.second);
+		return false;
+	}
+	Val get() { return _max; }
+private:
+	Time _cutoff;
+	Val& _max;
+};
+
+std::ostream& operator<<(std::ostream& ostr, const std::list<std::pair<unsigned, double>>& list)
+{
+	for (auto &i : list) {
+		ostr << "<" << i.first << "," << i.second << "> ";	}
+	return ostr;
+}
+
+int main() 
+{
+	using sample = std::pair<unsigned, double>;
+	using pred = PredRetainMax<sample>;
+	
+	sample a{1,12.2};
+	sample b{2,11.778};
+	sample c{3,9.2};
+	sample d{4,-2.6};
+	sample e{5,10.1};
+
+	std::list<sample> samples{ d,c,b,a };
+	cout << "original list is: " << samples << endl;
+
+	double maxval(-std::numeric_limits<double>::infinity());
+	//eliminate samples older than 2
+	samples.remove_if(pred(2, maxval));
+// 	double maxval;
+// 	const unsigned cutoff = 2;
+// 	samples.remove_if([&maxval,cutoff](sample s) 
+// 	{
+// 		//if not a member, then we found the head of the sublist
+// 		//of expired samples
+// 		if (s.first < cutoff) return true;
+// 		//otherwise update max and report that we havent 
+// 		//found an expired sample
+// 		maxval = std::max(maxval, s.second);
+// 		return false;
+// 	});
+	cout << "max is: " << maxval << ", list is: " << samples << endl << endl;
+// 	cout << "max is: " << p2.get() << ", list is: " << samples << endl << endl;
+
+	//add new value
+	samples.push_front(e);
+	//reset max
+	maxval = -std::numeric_limits<double>::infinity();
+// 	PredRetainMax<sample> p2x(2);
+// 	samples.remove_if(p2x);
+
+	//eliminate samples older than 2
+	samples.remove_if(pred(2, maxval));
+	cout << "max is: " << maxval << ", list is: " << samples << endl << endl;
+// 	cout << "max is: " << p2.get() << ", list is: " << samples << endl << endl;
+// 
+	//reset max
+	maxval = -std::numeric_limits<double>::infinity();
+	//eliminate samples older than 3
+	samples.remove_if(pred(3, maxval));
+	cout << "max is: " << maxval << ", list is: " << samples << endl << endl;
+// 	PredRetainMax<sample> p3(3);
+// 	samples.remove_if(p3);
+// 	cout << "max is: " << p2.get() << ", list is: " << samples << endl << endl;
+
+	return 0;
+}

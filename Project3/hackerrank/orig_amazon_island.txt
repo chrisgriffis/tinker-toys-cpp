@@ -1,0 +1,60 @@
+/*
+given a map to a collection of islands.
+
+write an algorithm that determines the # of islands in the map :
+int findNumOfIslands(char[][] map);
+
+== = ++ += ==
+= ++++ == ++
+== == == == +
+++++ == == =
+*/
+
+int findNumOfIslands(vector<vector<char>> map)
+{
+	int island_count(0);
+	const char island_piece = '+';
+	using coord = pair<int, int>;
+	unordered_set<coord> visited;
+
+	auto DFS = [&](coord current) {
+		if (map[current.first][current.second] == island_piece)
+		{
+			visited.insert(current);
+			coord
+				left{ current.first, current.second - 1 },
+				right{ current.first, current.second + 1 },
+				up{ current.first + 1, current.second },
+				down{ current.first - 1, current.second };
+
+			if ((current.first + 1) > 0 && (current.first + 1) < map.begin()->size() && (current.second > 0) && (current.second < map.begin()->begin()->size()))
+				DFS(left);
+
+			// -1 for first
+			if ((current.first - 1) > 0 && (current.first - 1) < map.begin()->size())
+				DFS(right);
+
+			//+1 for second 
+			if (current.first > 0 && current.first < map.begin()->size())
+				DFS(up);
+
+			//-1 for second
+			if (current.first > 0 && current.first < map.begin()->size())
+				DFS(down);
+		}
+		else return;
+	}
+
+	for (auto row_itr = map.begin(); row_itr != map.end(); ++row_itr)
+		for (auto col_itr = row_itr->begin(); col_itr != row_itr->end(); ++col_itr)
+		{
+			coord current{ row_itr - map.begin(),col_itr - row_itr->begin() };
+			if (map[current.first][current.second] == island_piece && visited.insert(current).second)
+			{
+				++island_count;
+				DFS(current);
+			}
+		}
+	return island_count;
+}
+

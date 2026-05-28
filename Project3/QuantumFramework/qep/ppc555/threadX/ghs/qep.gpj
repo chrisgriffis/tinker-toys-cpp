@@ -1,0 +1,86 @@
+#!gbuild
+#******************************************************************************
+# This library provides
+#******************************************************************************
+[Library]
+
+
+#------------------------------------------------------------------------------
+#
+#      ! ! !  DO NOT USE GREEN HILLS IDE TO MODIFY PROJECT OPTIONS  ! ! !
+#
+# doing so will destroy the customized formatting of this file.  The Green Hills 
+# IDE can be used to edit this file directly, right click on project -> Edit.
+#------------------------------------------------------------------------------
+# If an option in this file is not needed, it is to be commented out,
+# NOT deleted.
+#------------------------------------------------------------------------------
+# This library provides access to Tiny XML
+#------------------------------------------------------------------------------
+# options that are commonly changed when setting up a new project from this 
+# template are highlighted by the following comment style
+#
+#******************************************************************************
+#
+#******************************************************************************
+
+
+
+#------------------------------------------------------------------------------
+# Include Paths
+#------------------------------------------------------------------------------
+# Place include paths in the default.gpj DO NOT place them here.
+#------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------
+# Compiler options
+#------------------------------------------------------------------------------
+# Most all compile options should be placed in the default.gpj not here.
+# List only compile options that this library needs to set differently from the
+# project defaults.  
+#------------------------------------------------------------------------------
+
+
+
+#******************************************************************************
+# Output Files
+#******************************************************************************
+# libraries should begin with Lib then the name of the library and end with 
+# the .a extension
+#
+# NOTE: This option must be set in the individual libraries, GHS does not allow
+#       it to be set in the default.gpj
+#------------------------------------------------------------------------------
+   -o $lib_output_path/qep.a
+
+   -I../../../../ports/ppc555/threadX/ghs
+   -I../../../../include
+   
+#------------------------------------------------------------------------------
+# Source File Path
+#------------------------------------------------------------------------------
+   :sourceDir=$source_path
+
+
+#------------------------------------------------------------------------------
+# Dependencies
+#------------------------------------------------------------------------------
+# Dependencies should not be placed in library projects, only in 
+# executable projects
+#------------------------------------------------------------------------------
+   #----------------------------------------------------------------------------
+   # Pre build libraries need to be listed first, otherwise they will not link 
+   # correctly to the library
+
+
+../../../source/qep.cpp
+../../../source/qfsm_ini.cpp
+../../../source/qfsm_dis.cpp
+../../../source/qhsm_ini.cpp
+../../../source/qhsm_dis.cpp
+../../../source/qhsm_top.cpp
+../../../source/qhsm_tra.cpp
+../../../source/qhsm_in.cpp
+
